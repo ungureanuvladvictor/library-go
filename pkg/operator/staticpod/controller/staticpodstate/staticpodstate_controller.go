@@ -142,6 +142,7 @@ func (c *StaticPodStateController) sync(ctx context.Context, syncCtx factory.Syn
 
 	default: // we have one image
 		// if have a consistent image and if that image the same as the current operand image, then we can update the version to reflect our new version
+		syncCtx.Recorder().Eventf("vladu", "Default case: image.List()[0] = %s; staus.ImageForOperandFromEnv() = %s", images.List()[0], status.ImageForOperandFromEnv())
 		if images.List()[0] == status.ImageForOperandFromEnv() {
 			c.versionRecorder.SetVersion(
 				c.operandName,
